@@ -1,7 +1,7 @@
 #Articles **4/25**
 
-  Build bibliography
-  Slipt up
+  Build bibliography  
+  Slipt up  
   Write summary
 
 #Infrastructure **4/11**
