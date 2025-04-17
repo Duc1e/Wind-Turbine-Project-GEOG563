@@ -1,6 +1,6 @@
 # Wind Turbine Project
 
-![](Fishing and Turbines.jpg){width="250"}
+![Course Icon]![](Fishing and Turbines.jpg){width="250"}
 
 Welcome to the project repo for the Wind Turbine Project. The Wind Turbine project is being done to meet the requirements of GEOG 463/563 at Oregon State University during the spring term of 2025. This repository will contain all the code and data we gather to build and implement the data analysis system supporting the project, notes our weekly 1:1s, and copies of the paper we write to report on our results. To learn more about the course, visit the ([Analytic Workflows Repo](https://github.com/Analytical-Workflows-for-Earth-Science/Sp2025){.uri}).
 
