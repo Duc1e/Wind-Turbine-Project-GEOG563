@@ -35,4 +35,4 @@ In order to implement the project, the team will accomplish the following tasks:
 | 9 (5/30) |  |  |  | Ongoing |  |
 | 10 (6/06) | BUFFER | BUFFER | BUFFER | BUFFER | BUFFER |
 
-See ([our Trello site](https://trello.com/b/Z67GFNTV/wind-turbine-project){.uri}) for more detail.
+See our [Trello site](https://trello.com/b/Z67GFNTV/wind-turbine-project) for more details.
