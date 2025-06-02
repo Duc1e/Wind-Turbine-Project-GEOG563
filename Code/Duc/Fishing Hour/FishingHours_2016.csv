@@ -1,0 +1,104 @@
+name,MMSI,flag,flag translated,GFW vessel type,GFW gear type,hours,vesselId,dataset
+Ossian,366773410,USA,United States of America,Fishing,Trawler,379.3933333333335,a30ac482e-e863-001e-346f-7e9e4dc62ebe,public-global-vessel-identity:v3.0
+Mandy J,367147830,USA,United States of America,Fishing,Trawler,336.0347222222223,c47928cc8-8574-d955-7270-f7209e938bd0,public-global-vessel-identity:v3.0
+Unknown vessel,366842490,USA,United States of America,Fishing,Trawler,240.06305555555565,ae1c67a67-7fcb-3f42-6e5c-80f3470c48ab,public-global-vessel-identity:v3.0
+Traveler,367153430,USA,United States of America,Fishing,Trawler,239.3641666666667,74a1f7c0c-c04c-2235-66a8-1c240dafebaf,public-global-vessel-identity:v3.0
+Mark I,303636000,USA,United States of America,Fishing,Trawler,223.64361111111108,f7a79cf89-9fa8-93c7-5b74-b2ae8aaee39f,public-global-vessel-identity:v3.0
+Miss Sue,366207630,USA,United States of America,Fishing,Trawler,219.7883333333334,39d154947-7b8a-12f6-9bd3-cf5040134c25,public-global-vessel-identity:v3.0
+Seadawn,367372000,USA,United States of America,Fishing,Trawler,169.80027777777767,ed088ba72-243a-b3ed-fb66-3790930cfab4,public-global-vessel-identity:v3.0
+Pacific,366207650,USA,United States of America,Fishing,Trawler,156.688888888889,fb0ff83f8-8cda-5ebd-41ed-80fffd40aa06,public-global-vessel-identity:v3.0
+Winona J,367479750,USA,United States of America,Fishing,Trawler,147.28777777777788,d5f0b2515-58ad-6aaa-855d-4b970966e3d8,public-global-vessel-identity:v3.0
+Sea Storm,367078130,USA,United States of America,Fishing,Other,128.2944444444445,aa1097a18-83d5-5759-82a5-f3f37e86db6f,public-global-vessel-identity:v3.0
+Perseverance,367618000,USA,United States of America,Fishing,Trawler,104.1383333333333,7e99a8fba-aa09-3c2c-c1eb-6d420c49318f,public-global-vessel-identity:v3.0
+Timmy Boy,367500440,USA,United States of America,Fishing,Fishing,95.49222222222222,a88520a67-70f3-0ac9-094e-c9baaeb430d0,public-global-vessel-identity:v3.0
+Miss Berdie,367341970,USA,United States of America,Fishing,Trawler,77.36944444444441,391a43b4a-a8fd-a521-e6ba-3d5ee37f057f,public-global-vessel-identity:v3.0
+Ms Julie,366842490,USA,United States of America,Fishing,Trawler,66.97805555555556,e3f17619f-fd7f-1a00-0714-a24cb5fdffe1,public-global-vessel-identity:v3.0
+Seattle Enterprise,369604000,USA,United States of America,Fishing,Trawler,62.997499999999995,b327de70e-e0d9-5cf0-0c6e-92a902fc55bb,public-global-vessel-identity:v3.0
+Kodiak Enterprise,368038000,USA,United States of America,Fishing,Trawler,60.94388888888889,021512b04-4abb-120f-21bd-47f6d55f8e23,public-global-vessel-identity:v3.0
+F/V Excalibur,366804620,USA,United States of America,Fishing,Trawler,56.14694444444442,5483bdee5-5fbc-4416-3528-96620cd4b635,public-global-vessel-identity:v3.0
+Bernadette,366233570,USA,United States of America,Fishing,Trawler,50.19194444444446,454a28f85-56e4-93cb-efa6-ff786439e8da,public-global-vessel-identity:v3.0
+Last.Straw,366245070,USA,United States of America,Fishing,Trawler,49.72111111111112,f9c015f21-19a6-9f1d-fd35-c4a96ed2fcf3,public-global-vessel-identity:v3.0
+Unknown vessel,367310250,USA,United States of America,Fishing,Trawler,47.87999999999999,4ea01f41e-e99f-6a93-c6c3-dfd37c92bdab,public-global-vessel-identity:v3.0
+Pacific Glacier,366946000,USA,United States of America,Fishing,Trawler,47.119444444444454,e5eb73df7-7c19-2810-1f9e-69647e59ca01,public-global-vessel-identity:v3.0
+Pacific Cloud,367373730,USA,United States of America,Fishing,Fishing,46.23527777777779,76f6dbaf2-27a5-ac73-6020-5d75442240ab,public-global-vessel-identity:v3.0
+Seeker,368578000,USA,United States of America,Fishing,Trawler,45.77527777777779,cdd99513f-f276-e737-5e5e-cdc1492b1fdf,public-global-vessel-identity:v3.0
+Excellence,338162000,USA,United States of America,Fishing,Trawler,42.36805555555556,f4c37b1e1-14cd-40b6-80ad-9a41580169fd,public-global-vessel-identity:v3.0
+Searcher 1,366831470,USA,United States of America,Fishing,Trawler,35.84444444444445,445280d4a-a3d8-0743-3b98-a0a0f901752c,public-global-vessel-identity:v3.0
+Major Steppen Stone,367651850,USA,United States of America,Fishing,Troller,34.787222222222226,8d721cab8-8a1a-e095-34bb-ca2b01b87c5e,public-global-vessel-identity:v3.0
+Island Enterprise,368037000,USA,United States of America,Fishing,Trawler,34.050555555555555,c7e7f3ac5-55a1-072d-9dd6-e1ad6514f94c,public-global-vessel-identity:v3.0
+Alaska Ocean,368293000,USA,United States of America,Fishing,Trawler,32.91444444444444,31d72d38d-d3b8-652b-62ce-d5f487dff294,public-global-vessel-identity:v3.0
+Arctic Storm,368555000,USA,United States of America,Fishing,Trawler,32.874166666666675,2485f32cd-de00-01ac-77a6-42898bad2804,public-global-vessel-identity:v3.0
+Texas Lady,367721920,USA,United States of America,Fishing,Trawler,29.066388888888884,53f8f2ab3-3e51-38b3-3d93-8993ea1aa346,public-global-vessel-identity:v3.0
+Unknown vessel,366233570,USA,United States of America,Fishing,Trawler,25.760277777777773,0a595b92a-a8c4-81c7-277b-52a3ffb49a65,public-global-vessel-identity:v3.0
+Ocean Invictus,367700050,USA,United States of America,Fishing,Trawler,25.75972222222222,74341c2b3-32dc-8fcd-c283-1a5ebcd6c621,public-global-vessel-identity:v3.0
+Unknown vessel,367134190,USA,United States of America,Fishing,Trawler,25.442222222222224,45028f7fe-ebe2-6e2f-8781-b7ff069b8db9,public-global-vessel-identity:v3.0
+Mandy J,367147830,USA,United States of America,Fishing,Trawler,23.475833333333334,caa87b920-0c58-b4a7-95ec-a31e0f4600ce,public-global-vessel-identity:v3.0
+Day Star,367402670,USA,United States of America,Fishing,Troller,23.25916666666667,468657259-98fe-9591-befd-aad2fe5ad49b,public-global-vessel-identity:v3.0
+American Dynasty,368272000,USA,United States of America,Fishing,Trawler,22.892222222222223,60b6acf5e-e5f7-e7d9-fbd3-e663107983e2,public-global-vessel-identity:v3.0
+Unknown vessel,367335360,USA,United States of America,Fishing,Trawler,22.888888888888886,5713ca2a3-3dea-ef73-690f-f6ce8cc4b8a9,public-global-vessel-identity:v3.0
+Carter Jon,366969110,USA,United States of America,Fishing,Fishing,21.74111111111111,a87606a32-2ee3-bfc2-20bc-3397a7efb0bd,public-global-vessel-identity:v3.0
+Pacific Surveyor,367490280,USA,United States of America,Fishing,Fishing,21.60083333333333,52b0ed9e1-1b96-bc8e-87de-554aa4d1474a,public-global-vessel-identity:v3.0
+Peso II,367020280,USA,United States of America,Fishing,Fishing,19.068611111111107,057c0ac26-6722-cf4e-23b3-79164673a6e6,public-global-vessel-identity:v3.0
+Pearl J,367412590,USA,United States of America,Fishing,Fishing,18.465277777777782,3b924ae7d-dab5-2c3f-7329-4e9cba764410,public-global-vessel-identity:v3.0
+Apache,367629990,USA,United States of America,Fishing,Trawler,17.795277777777777,89e87355a-aca0-5b16-bb77-a56e9f157824,public-global-vessel-identity:v3.0
+Unknown vessel,367408970,USA,United States of America,Fishing,Trawler,15.311944444444444,3d4d8c633-38ed-5c09-cd2c-a5e8a7846621,public-global-vessel-identity:v3.0
+Unknown vessel,367616260,USA,United States of America,Fishing,Trawler,15.207500000000001,fd7dd9196-66fd-6cf8-a081-058c45d714af,public-global-vessel-identity:v3.0
+American Triumph,366047000,USA,United States of America,Fishing,Trawler,15.196666666666665,f07e012d6-61de-ffa0-6c07-c90b220c4193,public-global-vessel-identity:v3.0
+F/V Coho,368319000,USA,United States of America,Fishing,Trawler,14.82777777777778,98415d7a1-152b-8047-ea18-6cceb8db0d41,public-global-vessel-identity:v3.0
+Noahs Ark,366934770,USA,United States of America,Fishing,Trawler,14.68416666666667,e9fcd74b7-7545-b6b3-2839-74eafececa59,public-global-vessel-identity:v3.0
+Northern Ram,368371000,USA,United States of America,Fishing,Trawler,12.290555555555553,ab69249e7-78fc-8d64-0f7b-f18d732d0814,public-global-vessel-identity:v3.0
+Blue Dolphin,367059190,USA,United States of America,Fishing,Inconclusive,11.457777777777777,1fa6143d8-8a1a-f025-9159-78a697ab8274,public-global-vessel-identity:v3.0
+Lady Kaye,367153680,USA,United States of America,Fishing,Fishing,11.193611111111112,53e42262a-a326-3aae-cb9a-50666c34cf81,public-global-vessel-identity:v3.0
+Wrangler,367170860,USA,United States of America,Fishing,Trawler,10.956388888888888,850eae8c1-1d0d-aafc-13e0-3a1f9e85473d,public-global-vessel-identity:v3.0
+Patriot,367616260,USA,United States of America,Fishing,Trawler,10.251944444444444,05e9d2d1a-a955-f537-03fa-bd3971478751,public-global-vessel-identity:v3.0
+Bayislander,367086760,USA,United States of America,Fishing,Trawler,10.163611111111111,340db2eec-ccb1-23c7-97fc-1a36a14901f9,public-global-vessel-identity:v3.0
+Arctic Fury,366468000,USA,United States of America,Fishing,Trawler,9.851944444444444,9404aba9d-d82d-48e5-efed-9db27f9734e4,public-global-vessel-identity:v3.0
+Unknown vessel,367320010,USA,United States of America,Fishing,Trawler,9.7975,5e0c14564-4daf-581a-41ab-0b573aebd4de,public-global-vessel-identity:v3.0
+Miss-Sarah,368206000,USA,United States of America,Fishing,Trawler,9.767777777777777,450f24d03-3933-5933-177e-956425510f8d,public-global-vessel-identity:v3.0
+Pacific Dynasty,366979610,USA,United States of America,Fishing,Fishing,9.61138888888889,daf5f4098-8f14-de2d-ad6b-cdd2836177f4,public-global-vessel-identity:v3.0
+Seajay,367511740,USA,United States of America,Fishing,Fishing,9.591944444444444,164bafa70-0445-08fd-3025-eae05ec80949,public-global-vessel-identity:v3.0
+Kaya C,367595030,USA,United States of America,Fishing,Fishing,9.48861111111111,485872a89-9b7c-7947-d528-40e7e2f61ded,public-global-vessel-identity:v3.0
+F/V Swan,367122760,USA,United States of America,Fishing,Fishing,9.34388888888889,d236e5be8-86b0-4538-0f50-8a371c78e9ea,public-global-vessel-identity:v3.0
+Sundad,367310250,USA,United States of America,Fishing,Trawler,8.880833333333333,e99037c0c-c11e-81cb-fd57-601a6db89f89,public-global-vessel-identity:v3.0
+Tilly,338174891,USA,United States of America,Fishing,Troller,8.634722222222221,2e2a1fe1b-b5d0-422d-9af3-a9a76f011885,public-global-vessel-identity:v3.0
+Sea Valley II,367182380,USA,United States of America,Fishing,Fishing,7.9477777777777785,cffc7d9bd-dc35-07a6-d1d4-1b28d0c6acf6,public-global-vessel-identity:v3.0
+Cape Foulweather,367134190,USA,United States of America,Fishing,Trawler,7.895277777777777,4daca5a71-1a9d-3520-13d2-0e8be05f4571,public-global-vessel-identity:v3.0
+Pacific Challenger,367326360,USA,United States of America,Fishing,Trawler,7.3308333333333335,c50c30625-50b2-06ad-108e-58de59e7dcda,public-global-vessel-identity:v3.0
+Western   Dawn,366264360,USA,United States of America,Fishing,Trawler,6.78888888888889,d9951ed05-5e92-36f2-c0a1-c587c5b2c499,public-global-vessel-identity:v3.0
+Unknown vessel,367147830,USA,United States of America,Fishing,Trawler,6.778055555555556,aed9babd2-2741-6fdf-0808-dfad6d844fe0,public-global-vessel-identity:v3.0
+Unknown vessel,367500440,USA,United States of America,Fishing,Fishing,6.710555555555556,8208e72da-a780-d0f7-0060-aa6f3462913f,public-global-vessel-identity:v3.0
+Nordic Star,367056452,USA,United States of America,Fishing,Trawler,6.6499999999999995,0b0834471-1991-45db-b747-ef98c090ce5d,public-global-vessel-identity:v3.0
+Skookumchuck Pisces,367499870,USA,United States of America,Fishing,Fishing,6.302222222222222,ef6af73bb-bf8c-1d9b-b265-540fa9dc3d35,public-global-vessel-identity:v3.0
+Dusk,366744320,USA,United States of America,Fishing,Trawler,5.836111111111111,3b050aeb8-8e91-303c-d249-266cd1a11252,public-global-vessel-identity:v3.0
+Ocean Rover,368032000,USA,United States of America,Fishing,Trawler,5.683888888888889,0b4bdcc68-8086-7e9a-a82d-75057af1e460,public-global-vessel-identity:v3.0
+Ken & Al,366392280,USA,United States of America,Fishing,Trawler,5.646111111111111,998a62e9a-a8ae-e0d7-673d-5adc865ed90c,public-global-vessel-identity:v3.0
+Peso II,367020280,USA,United States of America,Fishing,Fishing,5.159722222222221,127a76737-75a8-ccf9-8f97-4507b37f7871,public-global-vessel-identity:v3.0
+Faith II,367060690,USA,United States of America,Fishing,Fishing,4.809444444444445,e68028ba9-97e7-2371-1c5a-a110ca070e0a,public-global-vessel-identity:v3.0
+Unknown vessel,367475970,USA,United States of America,Fishing,Trawler,4.721111111111111,2ed5db98f-f77c-4a1f-3d1d-c2f93a8f6a41,public-global-vessel-identity:v3.0
+Predator,368565000,USA,United States of America,Fishing,Trawler,4.16,4855e416e-e0f4-de5b-a354-5f4ae532b003,public-global-vessel-identity:v3.0
+Endeavor,367327250,USA,United States of America,Fishing,Troller,4.044722222222222,56a3f39a1-149b-14a7-0c58-0eeae99d3426,public-global-vessel-identity:v3.0
+Unknown vessel,367428110,USA,United States of America,Fishing,Trawler,3.7727777777777773,324d0e0f0-004a-d744-b946-ab736419baa0,public-global-vessel-identity:v3.0
+Swell Rider,367079690,USA,United States of America,Fishing,Trawler,3.665,7abf9fe72-2652-3c71-589f-c6ed8b061e2e,public-global-vessel-identity:v3.0
+Katie Ann,366499000,USA,United States of America,Fishing,Trawler,3.3855555555555554,2569b5d43-3ad8-c87c-5725-0f7588b74278,public-global-vessel-identity:v3.0
+Northern Jaeger,366046000,USA,United States of America,Fishing,Trawler,3.2952777777777778,23da84e61-13c8-8cd0-02bd-58f68120ca6c,public-global-vessel-identity:v3.0
+Marauder,366174810,USA,United States of America,Fishing,Fishing,3.206111111111112,2f8eea268-8070-ea04-7e4f-f6a8d790ab20,public-global-vessel-identity:v3.0
+Pegasus,368572000,USA,United States of America,Fishing,Trawler,3.1352777777777776,0ab88698d-dbc4-a7a8-6d52-f8b79fd69986,public-global-vessel-identity:v3.0
+Unknown vessel,367162440,USA,United States of America,Fishing,Fishing,3.069166666666667,1038a294d-daf3-93f9-fc07-a73e1a980cbd,public-global-vessel-identity:v3.0
+Trinity,367463820,USA,United States of America,Fishing,Trawler,2.9736111111111105,d4fc60516-63c5-cd0b-4d7b-1ee36cc3e402,public-global-vessel-identity:v3.0
+Northern Eagle,368085000,USA,United States of America,Fishing,Trawler,2.694722222222222,a401e743a-a6e5-5102-c90e-c52bdcadddb1,public-global-vessel-identity:v3.0
+Lisa Melinda,366738920,USA,United States of America,Fishing,Trawler,2.5436111111111113,c05e6e833-36b9-e4ed-a1cd-718f83506fdc,public-global-vessel-identity:v3.0
+St John II,366712000,USA,United States of America,Fishing,Set longline,2.5125,d15f61c79-9fa9-9abb-1710-cf5d85a8ee83,public-global-vessel-identity:v3.0
+Pacific Future,367046890,USA,United States of America,Fishing,Trawler,2.075,0493a33b0-035d-1477-791f-2ae4c7373295,public-global-vessel-identity:v3.0
+Westernbreeze,367408970,USA,United States of America,Fishing,Trawler,1.9983333333333333,1ae4c7d63-33ea-99bf-6cd7-737c952dbf67,public-global-vessel-identity:v3.0
+Coast Pride3333,367356180,USA,United States of America,Fishing,Fishing,1.9413888888888888,9e50b8064-4c1d-c277-6f49-e1aa66c3c4f5,public-global-vessel-identity:v3.0
+Capt Ryan,366954430,USA,United States of America,Fishing,Trawler,1.9344444444444444,f6afc99b0-095e-6d67-8a9a-57ba84890658,public-global-vessel-identity:v3.0
+Major Steppen Stone,367651850,USA,United States of America,Fishing,Troller,1.1747222222222222,e3f9a637d-dc2e-8a3a-e899-d9809625b1ea,public-global-vessel-identity:v3.0
+Raven,367774000,USA,United States of America,Fishing,Trawler,1.0697222222222222,17637d0a4-474a-886e-5e8f-0eedf8bc1d6e,public-global-vessel-identity:v3.0
+Anona Kay,367157650,USA,United States of America,Fishing,Fishing,1.0472222222222223,8185e01ce-e9b9-c27d-3546-0d7e5eac4cbc,public-global-vessel-identity:v3.0
+Perseverance,36761800,USA,United States of America,Fishing,Trawler,0.8802777777777778,89870cc70-08fb-9724-4686-d04d561ffa8f,public-global-vessel-identity:v3.0
+Muir Milach,367672390,USA,United States of America,Fishing,Trawler,0.8091666666666667,4730b07a8-8377-06f2-24c0-79399bf2a64e,public-global-vessel-identity:v3.0
+Emerald Sea,338195571,USA,United States of America,Fishing,Fishing,0.7919444444444443,e998ba25b-bb96-2748-7367-11474f2b3875,public-global-vessel-identity:v3.0
+Unknown vessel,338287000,USA,United States of America,Fishing,Fishing,0.6672222222222222,55ac1f6c3-38bf-2f77-ffe9-2d6c6305556e,public-global-vessel-identity:v3.0
+Pacific Ram,338494100,USA,United States of America,Fishing,Trawler,0.46444444444444444,30144f1af-fce3-b410-f3f6-efb97dcb0fbd,public-global-vessel-identity:v3.0
+R/V Miss Linda,367418650,USA,United States of America,Fishing,Fishing,0.3491666666666667,0259820c2-25fb-df45-a90f-b8b6bfa35434,public-global-vessel-identity:v3.0
+Unknown vessel,367742830,USA,United States of America,Fishing,Inconclusive,0.26666666666666666,de7e69808-8e9e-cdeb-dcf1-4981e54cc6a5,public-global-vessel-identity:v3.0
