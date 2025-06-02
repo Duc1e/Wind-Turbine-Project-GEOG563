@@ -1,0 +1,121 @@
+---
+title: "2015:2024"
+output: html_document
+date: "2025-05-23"
+---
+
+## 1. Read fish data
+```{r}
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(stringr)
+
+# Step 1: Read raw data and skip first header row (which has month labels)
+file_path <- "D:/OSU/ANALYTIC WORKFLOWS/PROJECT/2015-2024 10 year landings.xlsx"
+raw_data <- read_excel(file_path, sheet = "Table 1", col_names = FALSE, skip = 1)
+
+# Step 2: Manually assign correct column names
+colnames(raw_data) <- c("Species", "Code", "2015", "2016", "2017", "2018", "2019", "2020",
+                        "2021", "2022", "2023", "2024", "Total")
+
+# Step 3: Filter rows that contain actual species names (non-empty and not header)
+clean_data <- raw_data %>%
+  filter(!is.na(Species), !Species %in% c("Fish", "Total"))
+
+# Step 4: Pivot longer to get month-wise entries
+long_data <- clean_data %>%
+  pivot_longer(cols = "2015":"2024", names_to = "Year", values_to = "Combined")
+
+# Step 5: Remove \r, split pounds and values
+long_data <- long_data %>%
+  mutate(Combined = str_replace_all(Combined, "\r", "")) %>%
+  separate(Combined, into = c("Pounds", "Value"), sep = "\n", convert = TRUE)
+
+# Step 6: Create final long format with one row per measurement
+final_data <- long_data %>%
+  select(Species, Year, Pounds, Value) %>%
+  pivot_longer(cols = Pounds:Value, names_to = "Type", values_to = "Value") %>%
+  filter(!is.na(Value))
+
+# View result
+print(final_data)
+```
+
+## 2. Filter groundfish
+```{r}
+# List of groundfish species
+groundfish_species <- c(
+  "Cabezon", "Cod, Pacific", "Flounder, arrowtooth", "Flounder, starry", "Greenling sp.",
+  "Halibut, Pacific", "Lingcod", "Rockfish, black", "Rockfish, black&yellow", "Rockfish, blue",
+  "Rockfish, brown", "Rockfish, canary", "Rockfish, china", "Rockfish, copper",
+  "Rockfish, darkblotched", "Rockfish, gopher", "Rockfish, grass", "Rockfish, Rougheye/blacks",
+  "Rockfish, Shelf", "Rockfish, shortraker", "Rockfish, Slope", "Rockfish, tiger",
+  "Rockfish, vermillion", "Rockfish, widow", "Rockfish, yellowtail", "Sablefish"
+)
+
+# Filter the final data for groundfish species only
+groundfish_data <- final_data %>% 
+  filter(Species %in% groundfish_species)
+
+# View the filtered data
+print(groundfish_data)
+```
+
+
+## Fishing value/hour
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# STEP 1: Load fishing effort data
+vessels <- read_csv("FishingHours_2024.csv") %>%
+  filter(`GFW vessel type` == "Fishing") %>%
+  select(name, MMSI, `GFW gear type`, hours, vesselId)
+
+# STEP 2: Define total fish + crustacean value
+total_fish <- 1526794
+total_crab <- 2169063
+total_value <- total_fish + total_crab
+
+# STEP 3: Allocate value to vessels by effort
+vessels_with_value <- vessels %>%
+  mutate(
+    effort_share = hours / sum(hours),
+    estimated_value = effort_share * total_value
+  )
+
+# STEP 4: Simulate grid allocation (4 random cells per vessel)
+n_cells <- 200
+set.seed(42)
+
+grid_value <- vessels_with_value %>%
+  rowwise() %>%
+  mutate(grid_ids = list(sample(paste0("cell_", 1:n_cells), 4))) %>%
+  unnest(grid_ids) %>%
+  mutate(value_per_cell = estimated_value / 4)
+
+print(grid_value)
+```
+
+
+```{r}
+# STEP 5: Summarize per grid cell
+grid_summary <- grid_value %>%
+  group_by(grid_ids) %>%
+  summarise(total_fishery_value = sum(value_per_cell))
+
+# STEP 6: Estimate development impact (θ = 0.25 baseline)
+theta <- 0.25
+grid_summary <- grid_summary %>%
+  mutate(
+    value_under_turbine = total_fishery_value * theta
+  )
+
+print(grid_summary)
+```
+
+
+
