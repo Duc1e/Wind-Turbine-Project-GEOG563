@@ -1,0 +1,282 @@
+---
+title: "2015:2024"
+output: html_document
+date: "2025-05-23"
+---
+
+## 1. Read fish data
+```{r}
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(stringr)
+
+# Step 1: Read raw data and skip first header row (which has month labels)
+file_path <- "D:/OSU/ANALYTIC WORKFLOWS/PROJECT/Fish Data/2019 BANDON.xlsx"
+raw_data <- read_excel(file_path, sheet = "Table 1", col_names = FALSE, skip = 1)
+
+# Step 2: Manually assign correct column names
+colnames(raw_data) <- c("Species", "Code", "January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December", "Total")
+
+# Step 3: Filter rows that contain actual species names (non-empty and not header)
+clean_data <- raw_data %>%
+  filter(!is.na(Species), !Species %in% c("Fish", "Total"))
+
+# Step 4: Pivot longer to get month-wise entries
+long_data <- clean_data %>%
+  pivot_longer(cols = January:December, names_to = "Month", values_to = "Combined")
+
+# Step 5: Remove \r, split pounds and values
+long_data <- long_data %>%
+  mutate(Combined = str_replace_all(Combined, "\r", "")) %>%
+  separate(Combined, into = c("Pounds", "Value"), sep = "\n", convert = TRUE)
+
+# Step 6: Create final long format with one row per measurement
+final_data <- long_data %>%
+  select(Species, Month, Pounds, Value) %>%
+  pivot_longer(cols = Pounds:Value, names_to = "Type", values_to = "Value") %>%
+  filter(!is.na(Value))
+
+# View result
+print(final_data)
+```
+
+## 2. Filter groundfish
+```{r}
+# List of groundfish species
+groundfish_species <- c(
+  "Cabezon", "Cod, Pacific", "Flounder, arrowtooth", "Flounder, starry", "Greenling sp.",
+  "Halibut, Pacific", "Lingcod", "Rockfish, black", "Rockfish, black&yellow", "Rockfish, blue",
+  "Rockfish, brown", "Rockfish, canary", "Rockfish, china", "Rockfish, copper",
+  "Rockfish, darkblotched", "Rockfish, gopher", "Rockfish, grass", "Rockfish, Rougheye/blacks",
+  "Rockfish, Shelf", "Rockfish, shortraker", "Rockfish, Slope", "Rockfish, tiger",
+  "Rockfish, vermillion", "Rockfish, widow", "Rockfish, yellowtail", "Sablefish"
+)
+
+# Filter the final data for groundfish species only
+groundfish_data <- final_data %>% 
+  filter(Species %in% groundfish_species)
+
+# View the filtered data
+print(groundfish_data)
+```
+
+
+## Fishing value/hour
+```{r}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Convert to wide format: Pounds and Value in separate columns per species/month
+catch_wide <- groundfish_data %>%
+  pivot_wider(names_from = Type, values_from = Value) %>%
+  mutate(Pounds = as.numeric(gsub(",", "", Pounds)),
+         Value = as.numeric(gsub(",", "", Value)))
+
+# Sum total pounds and value per species (over all months)
+catch_summary <- catch_wide %>%
+  group_by(Species) %>%
+  summarise(Sum_Pounds = sum(Pounds, na.rm = TRUE),
+            Sum_Value = sum(Value, na.rm = TRUE))
+total_catch <- catch_summary %>%
+  summarise(Total_Pounds = sum(Sum_Pounds, na.rm = TRUE),
+            Total_Value = sum(Sum_Value, na.rm = TRUE))
+
+# Load fishing effort data
+vessels <- read_csv("FishingHours_2019.csv") %>%
+  filter(`GFW vessel type` == "Fishing") %>%
+  select(vesselId, name, `GFW gear type`, hours)
+
+# Sum total fishing hours (from your fishing hours data)
+total_hours <- sum(vessels$hours, na.rm = TRUE)
+
+# Calculate catch per hour per species
+total_catch <- total_catch %>%
+  mutate(Pounds_per_hour = Total_Pounds / total_hours,
+         Value_per_hour = Total_Value / total_hours)
+
+print(total_catch)
+
+# Extract the scalar values from total_catch
+pounds_per_hour <- total_catch$Pounds_per_hour
+value_per_hour <- total_catch$Value_per_hour
+
+# Estimate catch per vessel
+
+vessel_catch_estimates <- vessels %>%
+  mutate(Estimated_Pounds = hours * pounds_per_hour,
+         Estimated_Value = hours * value_per_hour)
+
+# View vessel estimates
+print(vessel_catch_estimates)
+```
+
+
+### make a grid (from step 1)
+```{r}
+# Load required libraries
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(leaflet)
+library(httr)
+library(jsonlite)
+library(lubridate)
+library(readr)
+library(geosphere)
+library(viridis)
+
+# Create Oregon lease areas
+create_lease_areas <- function() {
+  coos_bay <- data.frame(
+    lon = c(-125.5, -124.8, -124.8, -125.5, -125.5),
+    lat = c(43.8, 43.8, 44.3, 44.3, 43.8)
+  )
+  
+  brookings <- data.frame(
+    lon = c(-124.8, -124.3, -124.3, -124.8, -124.8),
+    lat = c(42.0, 42.0, 42.8, 42.8, 42.0)
+  )
+  
+  coos_sf <- st_polygon(list(as.matrix(coos_bay))) %>%
+    st_sfc(crs = 4326) %>%
+    st_sf(area_name = "Coos Bay")
+  
+  brookings_sf <- st_polygon(list(as.matrix(brookings))) %>%
+    st_sfc(crs = 4326) %>%
+    st_sf(area_name = "Brookings")
+  
+  lease_areas <- rbind(coos_sf, brookings_sf)
+  return(lease_areas)
+}
+
+# Create 2x2km analysis grid (reference grid for planning)
+create_analysis_grid <- function(lease_areas, cell_size_km = 2) {
+  lease_proj <- st_transform(lease_areas, crs = 3857)
+  bbox <- st_bbox(lease_proj)
+  cell_size_m <- cell_size_km * 1000
+  
+  grid <- st_make_grid(
+    lease_proj,
+    cellsize = c(cell_size_m, cell_size_m),
+    what = "polygons"
+  ) %>%
+    st_sf(site_id = 1:length(.))
+  
+  grid_intersect <- st_intersects(grid, lease_proj)
+  grid_in_lease <- grid[lengths(grid_intersect) > 0, ]
+  grid_wgs84 <- st_transform(grid_in_lease, crs = 4326)
+  
+  centroids <- st_centroid(grid_wgs84)
+  coords <- st_coordinates(centroids)
+  
+  grid_wgs84$lon <- coords[, 1]
+  grid_wgs84$lat <- coords[, 2]
+  grid_wgs84$site_id <- 1:nrow(grid_wgs84)
+  
+  return(grid_wgs84)
+}
+
+# Function to filter NREL wind data to lease areas
+filter_nrel_to_lease_areas <- function(all_wind_data, lease_areas) {
+  # Create unique NREL locations
+  nrel_unique_locations <- all_wind_data %>%
+    select(site_id, latitude, longitude) %>%
+    distinct()
+  
+  # Convert to spatial data
+  nrel_sf <- st_as_sf(nrel_unique_locations, 
+                      coords = c("longitude", "latitude"), 
+                      crs = 4326)
+  
+  # Filter NREL points to lease areas only
+  nrel_in_lease <- st_filter(nrel_sf, lease_areas)
+  
+  # Get the site_ids for filtering
+  lease_site_ids <- nrel_in_lease$site_id
+  
+  # Filter wind data to lease areas only
+  wind_data_lease <- all_wind_data %>%
+    filter(site_id %in% lease_site_ids)
+  
+  # Print summary
+  cat("=== NREL DATA FILTERED TO LEASE AREAS ===\n")
+  cat("NREL points in lease areas:", nrow(nrel_in_lease), "out of", nrow(nrel_sf), "total\n")
+  cat("Wind data rows in lease areas:", nrow(wind_data_lease), "out of", nrow(all_wind_data), "total\n")
+  cat("Unique sites in lease areas:", length(unique(wind_data_lease$site_id)), "\n")
+  cat("Lat range:", round(min(wind_data_lease$latitude), 3), "to", round(max(wind_data_lease$latitude), 3), "\n")
+  cat("Lon range:", round(min(wind_data_lease$longitude), 3), "to", round(max(wind_data_lease$longitude), 3), "\n")
+  
+  return(list(
+    wind_data_lease = wind_data_lease,
+    nrel_points_lease = nrel_in_lease,
+    lease_site_ids = lease_site_ids
+  ))
+}
+
+# Create the lease areas and reference grid
+lease_areas <- create_lease_areas()
+reference_grid <- create_analysis_grid(lease_areas)
+```
+
+
+
+## Fishing value 
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+# Assume vessel_catch_estimates has VesselID, hours, Estimated_Value
+
+# Calculate total value from vessels
+total_value <- sum(vessel_catch_estimates$Estimated_Value, na.rm = TRUE)
+
+# Calculate each vessel's share of effort and assign estimated value proportionally
+vessels_with_value <- vessel_catch_estimates %>%
+  mutate(
+    effort_share = hours / sum(hours, na.rm = TRUE),
+    estimated_value = effort_share * total_value
+  )
+
+set.seed(42)  # for reproducibility
+n_cells <- nrow(reference_grid)
+
+vessels_with_value_grid <- vessels_with_value %>%
+  rowwise() %>%
+  mutate(grid_ids = list(sample(reference_grid$site_id, 4))) %>%
+  unnest(grid_ids) %>%
+  mutate(value_per_cell = estimated_value / 4)
+
+grid_summary <- vessels_with_value_grid %>%
+  group_by(grid_ids) %>%
+  summarise(total_fishery_value = sum(value_per_cell, na.rm = TRUE)) %>%
+  rename(site_id = grid_ids)
+
+# Join summary to reference_grid
+reference_grid_with_value <- reference_grid %>%
+  left_join(grid_summary, by = "site_id") %>%
+  mutate(
+    total_fishery_value = ifelse(is.na(total_fishery_value), 0, total_fishery_value)
+  )
+
+# Define impact factor θ
+theta <- 0.25
+
+# Calculate value under turbine impact
+reference_grid_with_value <- reference_grid_with_value %>%
+  mutate(value_under_turbine = total_fishery_value * theta)
+
+library(ggplot2)
+
+ggplot(reference_grid_with_value) +
+  geom_sf(aes(fill = total_fishery_value)) +
+  scale_fill_viridis_c() +
+  labs(title = "Estimated Fishery Value per Grid Cell (θ=0.25)")
+
+```
+
+
+
