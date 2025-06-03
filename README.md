@@ -36,3 +36,31 @@ In order to implement the project, the team will accomplish the following tasks:
 | 10 (6/06) | BUFFER | BUFFER | BUFFER | BUFFER | BUFFER |
 
 See our [Trello site](https://trello.com/b/Z67GFNTV/wind-turbine-project) for more details.
+
+The implementation is in four files in the "Code" sub-directory:
+
+-   Step 1: Setup basic data structures and build the grid we use for the rest of the analysis. The leasing strategy off the Oregon Coast allows electric companies to pay for the opportunity to set up a Wind Turbine anywhere in the target areas off Brookings and Coos Bay. Assuming that a single Turbine requires 2x2km of space to operate, we arbitrarily lay a grid of similarly sized regions over the regions.
+
+    The Coos Bay lease area, to the upper left of the analysis area, is at 43.8°-44.3°N, 125.5°-124.8°W. The Brookings lease area, to the lower right of the analysis area, is at 42.0°-42.8°N, 124.8°-124.3°W. There are 1,586 potential locations in the two areas, assuming 2x2km spacing.
+
+    Run Step 1 by sourcing the entire file. It contains a function that is called by the Step 2 code that loads wind data into the grid, so, you have to run Step 1 first. At the end of execution, it prints a debugging table showing the grid areas. TODO: Make this a map.
+
+-   Step 2: Process the Wind Data, and store it into the analysis grid. The Wind Data was downloaded from NREL. It covers a rectangular area defined by the Coos Bay lease area to its northwest and by Brookings to its southeast. You can download it the entire data set from this link: [NRELWindData.zip](https://1drv.ms/u/c/fa5fbd6ce30e021b/EQlybtjJ89RGr2187MpkXtIBWNAdf67UOzTczp_UmSjz8w?e=c3jQqH). TODO: We'll build a smaller sample file (just Bandon?) that can be uploaded to GitHub.
+
+    The ZIP file contains 51M hourly records in CSV files that, when unloaded from the ZIP file, take up 2.86G of storage. These CSV files have an ideosyncratic structure. The first row contains data that is constant over all the data rows (the subset of this data we need is also in the file name, which is where we get it – as a result, we ignore the first row while reading). The second row contains column labels. The rest of the rows contain actual data.
+
+    Because we want a data file that we can use flexibly moving forward, we build an output file that contains the ten columns in the CSV files and three columns for SITEID, LAT, and LON, filtered down to our lease area locations. We are processing wind data from a height of 120m, and air temperature from a height of 2m.
+
+    Run Step 2 by sourcing the file. It will take a while. It will create a single CSV file. (See previous TODO).
+
+-   Step 3: Calculate power available at each grid point. Rather than choosing a particular brand of wind turbine, we use a generic power curve for a 10MW offshore turbine. We calculate annual potential revenue metrics per location. The mean capacity factor for the area is 36.5%. There are 566 high-quality sites (capacity factor \>= 40%). The total achievable annual revenue for the area is \$2.5B (assuming \$50/MWh).
+
+    Run Step 3 by sourcing the file. It creates three "maps" (TODO: make real maps).
+
+-   Step 4: Fisheries data
+
+    Our fisheries strategy is evolving. The version "Step 4a" calculates a simple proxy allocation of annual Oregon commercial fishing data (around \$190M statewide (QUERY: Why do we allocate total statewide revenue to these two areas?). The code contains two algorithms: calculate fishing in a grid zone based on its distance from shore, and calculate it based on the depth of water in the area.
+
+    A key assumption in this paper (taken from Crow 2024) is that fishing in a zone with a wind turbine is only 1/2 as productive as fishing in open water. This is parameter in the code, and 1/4 and 3/4 are coded up as options to explore.
+
+    Run Step 4 by sourcing the file. It also contains several "maps" (TODO: make real maps).

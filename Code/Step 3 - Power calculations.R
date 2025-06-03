@@ -154,8 +154,10 @@ plot_wind_resource <- function(annual_power, lease_areas) {
 
 cat("=== STEP 3 FUNCTIONS LOADED ===\n")
 cat("Ready to calculate power generation!\n\n")
-cat("To run Step 3, execute:\n")
-cat("1. annual_power <- calculate_annual_power(wind_data_lease)\n")
-cat("2. summarize_wind_resource(annual_power)\n") 
-cat("3. maps <- plot_wind_resource(annual_power, lease_areas)\n")
-cat("4. maps$capacity_factor  # View capacity factor map\n")
+
+annual_power <- calculate_annual_power(wind_data_lease)
+summarize_wind_resource(annual_power)
+maps <- plot_wind_resource(annual_power, lease_areas)
+maps$capacity_factor
+
+cat("Power generation calculated!\n\n")

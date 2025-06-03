@@ -1,4 +1,7 @@
 # Step 1: Oregon Offshore Wind Analysis - Grid Creation and NREL Data Integration
+#
+# Execute this file by sourcing it in RStudio
+#
 # Load required libraries
 library(sf)
 library(dplyr)

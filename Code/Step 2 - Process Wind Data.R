@@ -1,8 +1,16 @@
 library(dplyr)
 
-# The wind data was downloaded overnight as a single ZIP file. It's in the 
-# data directory. All the files were extracted into a directory called
-# WindData
+# The wind data was downloaded overnight as a single ZIP file. It's available 
+# via this link: 
+
+# https://1drv.ms/u/c/fa5fbd6ce30e021b/EQlybtjJ89RGr2187MpkXtIBWNAdf67UOzTczp_UmSjz8w?e=c3jQqH
+
+# CSV files from this ZIP file ened to be extracted into a local directory. 
+# By default, we put them in a directory called "Data/WindData" relative to 
+# the working directory in which this file is executed. 
+
+# TODO: Build a small sample file (for just Bandon?) that can be uploaded to
+# GitHub.
 
 # Function to read and process a single wind file
 read_wind_file_final <- function(filepath) {
@@ -37,7 +45,7 @@ read_wind_file_final <- function(filepath) {
 }
 
 # Get list of all wind files
-wind_files <- list.files(path = "Data/WindData", 
+wind_files <- list.files(path = "Data/WindData",
                          pattern = "*.csv", 
                          full.names = TRUE)
 
@@ -46,7 +54,7 @@ cat("Found", length(wind_files), "wind data files\n")
 # Process all files with progress tracking
 cat("Processing all wind data files...\n")
 
-# METHOD 1: Using lapply (more R-like)
+# Using lapply (efficient at this scale, though this takes time)
 all_wind_data <- bind_rows(lapply(wind_files, read_wind_file_final))
 
 # Check the results
