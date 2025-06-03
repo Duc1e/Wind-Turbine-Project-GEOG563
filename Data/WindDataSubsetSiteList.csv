@@ -1,0 +1,128 @@
+site_id,lat,lon,lease_area,distance_from_shore_approx
+80064,42.04,-124.72,Brookings,Medium
+81852,42.04,-124.62,Brookings,Medium
+84534,42.04,-124.47,Brookings,Close
+84980,42.02,-124.45,Brookings,Close
+78729,42.15,-124.79,Brookings,Medium
+80513,42.08,-124.7,Brookings,Medium
+80066,42.08,-124.72,Brookings,Medium
+82749,42.09,-124.57,Brookings,Medium
+82302,42.09,-124.59,Brookings,Medium
+84538,42.11,-124.47,Brookings,Close
+83198,42.13,-124.54,Brookings,Medium
+86323,42.06,-124.37,Brookings,Close
+85431,42.09,-124.42,Brookings,Close
+86772,42.09,-124.34,Brookings,Close
+79179,42.21,-124.77,Brookings,Medium
+80072,42.19,-124.72,Brookings,Medium
+80075,42.24,-124.72,Brookings,Medium
+81862,42.23,-124.62,Brookings,Medium
+82756,42.22,-124.57,Brookings,Medium
+83203,42.22,-124.54,Brookings,Medium
+84097,42.22,-124.49,Brookings,Close
+86330,42.19,-124.37,Brookings,Close
+85882,42.17,-124.39,Brookings,Close
+87224,42.19,-124.32,Brookings,Close
+78739,42.34,-124.79,Brookings,Medium
+80524,42.28,-124.69,Brookings,Medium
+80527,42.34,-124.69,Brookings,Medium
+81868,42.34,-124.62,Brookings,Medium
+82313,42.3,-124.59,Brookings,Medium
+83653,42.28,-124.52,Brookings,Medium
+83655,42.32,-124.52,Brookings,Medium
+85443,42.32,-124.42,Brookings,Close
+85444,42.34,-124.42,Brookings,Close
+87229,42.28,-124.32,Brookings,Close
+78744,42.43,-124.79,Brookings,Medium
+80082,42.37,-124.72,Brookings,Medium
+80081,42.36,-124.72,Brookings,Medium
+81423,42.37,-124.64,Brookings,Medium
+81426,42.43,-124.64,Brookings,Medium
+83659,42.39,-124.52,Brookings,Medium
+84105,42.37,-124.49,Brookings,Close
+85894,42.39,-124.39,Brookings,Close
+86341,42.39,-124.37,Brookings,Close
+86786,42.35,-124.34,Brookings,Close
+79194,42.49,-124.77,Brookings,Medium
+79644,42.54,-124.74,Brookings,Medium
+80982,42.49,-124.67,Brookings,Medium
+82323,42.49,-124.59,Brookings,Medium
+81876,42.49,-124.62,Brookings,Medium
+84111,42.49,-124.49,Brookings,Close
+84112,42.5,-124.49,Brookings,Close
+86345,42.47,-124.37,Brookings,Close
+85008,42.54,-124.44,Brookings,Close
+87242,42.52,-124.31,Brookings,Close
+79199,42.58,-124.77,Brookings,Medium
+80989,42.62,-124.67,Brookings,Medium
+80991,42.65,-124.67,Brookings,Medium
+81880,42.56,-124.62,Brookings,Medium
+82330,42.62,-124.59,Brookings,Medium
+84119,42.63,-124.49,Brookings,Close
+84565,42.62,-124.46,Brookings,Close
+85908,42.65,-124.39,Brookings,Close
+85907,42.63,-124.39,Brookings,Close
+86798,42.58,-124.34,Brookings,Close
+79654,42.73,-124.74,Brookings,Medium
+82780,42.67,-124.57,Brookings,Medium
+83674,42.67,-124.51,Brookings,Medium
+86356,42.67,-124.36,Brookings,Close
+87253,42.73,-124.31,Brookings,Close
+80104,42.78,-124.72,Brookings,Medium
+81445,42.78,-124.64,Brookings,Medium
+83681,42.8,-124.51,Brookings,Medium
+86363,42.8,-124.36,Brookings,Close
+68986,43.84,-125.36,Coos Bay,Far
+72562,43.84,-125.15,Coos Bay,Far
+75244,43.84,-125,Coos Bay,Medium
+76138,43.84,-124.94,Coos Bay,Medium
+67200,43.88,-125.46,Coos Bay,Far
+67648,43.9,-125.43,Coos Bay,Far
+68544,43.94,-125.38,Coos Bay,Far
+69438,43.94,-125.33,Coos Bay,Far
+70779,43.94,-125.25,Coos Bay,Far
+71224,43.9,-125.23,Coos Bay,Far
+73012,43.9,-125.12,Coos Bay,Far
+74802,43.94,-125.02,Coos Bay,Far
+75694,43.9,-124.97,Coos Bay,Medium
+76590,43.94,-124.92,Coos Bay,Medium
+77034,43.88,-124.89,Coos Bay,Medium
+77928,43.88,-124.84,Coos Bay,Medium
+67207,44.01,-125.46,Coos Bay,Far
+68995,44.01,-125.36,Coos Bay,Far
+68103,44.05,-125.41,Coos Bay,Far
+70334,43.97,-125.28,Coos Bay,Far
+71678,44.03,-125.2,Coos Bay,Far
+71675,43.97,-125.2,Coos Bay,Far
+72124,44.01,-125.18,Coos Bay,Far
+73017,43.99,-125.12,Coos Bay,Far
+74804,43.98,-125.02,Coos Bay,Far
+75251,43.98,-125,Coos Bay,Medium
+77485,43.96,-124.87,Coos Bay,Medium
+77040,43.99,-124.89,Coos Bay,Medium
+78380,43.97,-124.81,Coos Bay,Medium
+66763,44.07,-125.49,Coos Bay,Far
+68551,44.07,-125.38,Coos Bay,Far
+68105,44.09,-125.41,Coos Bay,Far
+70341,44.11,-125.28,Coos Bay,Far
+71684,44.14,-125.2,Coos Bay,Far
+72576,44.11,-125.15,Coos Bay,Far
+73472,44.14,-125.1,Coos Bay,Far
+74809,44.07,-125.02,Coos Bay,Far
+75259,44.12,-125,Coos Bay,Medium
+76598,44.09,-124.92,Coos Bay,Medium
+76601,44.14,-124.92,Coos Bay,Medium
+77942,44.14,-124.84,Coos Bay,Medium
+66773,44.25,-125.49,Coos Bay,Far
+68559,44.22,-125.39,Coos Bay,Far
+69005,44.2,-125.36,Coos Bay,Far
+70795,44.24,-125.26,Coos Bay,Far
+69901,44.24,-125.31,Coos Bay,Far
+71241,44.22,-125.23,Coos Bay,Far
+71690,44.25,-125.2,Coos Bay,Far
+73921,44.18,-125.07,Coos Bay,Far
+75708,44.16,-124.97,Coos Bay,Medium
+74814,44.16,-125.02,Coos Bay,Far
+77499,44.22,-124.87,Coos Bay,Medium
+76604,44.2,-124.92,Coos Bay,Medium
+78390,44.16,-124.81,Coos Bay,Medium

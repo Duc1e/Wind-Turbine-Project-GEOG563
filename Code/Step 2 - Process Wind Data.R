@@ -1,16 +1,18 @@
 library(dplyr)
 
-# The wind data was downloaded overnight as a single ZIP file. It's available 
+# The wind data was downloaded from NREL as a single ZIP file. It's available 
 # via this link: 
 
 # https://1drv.ms/u/c/fa5fbd6ce30e021b/EQlybtjJ89RGr2187MpkXtIBWNAdf67UOzTczp_UmSjz8w?e=c3jQqH
 
-# CSV files from this ZIP file ened to be extracted into a local directory. 
+# CSV files from this ZIP file need to be extracted into a local directory. 
 # By default, we put them in a directory called "Data/WindData" relative to 
 # the working directory in which this file is executed. 
 
-# TODO: Build a small sample file (for just Bandon?) that can be uploaded to
-# GitHub.
+# There's a zip file available in the repo that contains a subset of the data. 
+# To use that data for testing, unzip it into a directory, and then set the 
+# line "wind_files <- list.files(path = "Data/WindData" to point to that
+# directory.
 
 # Function to read and process a single wind file
 read_wind_file_final <- function(filepath) {
@@ -66,5 +68,5 @@ cat("  Latitude:", min(all_wind_data$latitude), "to", max(all_wind_data$latitude
 cat("  Longitude:", min(all_wind_data$longitude), "to", max(all_wind_data$longitude), "\n")
 
 # Save the processed data
-write.csv(all_wind_data, "processed_wind_data.csv", row.names = FALSE)
+write.csv(all_wind_data, "Data/processed_wind_data.csv", row.names = FALSE)
 cat("Data saved to 'processed_wind_data.csv'\n")

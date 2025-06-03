@@ -45,11 +45,13 @@ The implementation is in four files in the "Code" sub-directory:
 
     Run Step 1 by sourcing the entire file. It contains a function that is called by the Step 2 code that loads wind data into the grid, so, you have to run Step 1 first. At the end of execution, it prints a debugging table showing the grid areas. TODO: Make this a map.
 
--   Step 2: Process the Wind Data, and store it into the analysis grid. The Wind Data was downloaded from NREL. It covers a rectangular area defined by the Coos Bay lease area to its northwest and by Brookings to its southeast. You can download it the entire data set from this link: [NRELWindData.zip](https://1drv.ms/u/c/fa5fbd6ce30e021b/EQlybtjJ89RGr2187MpkXtIBWNAdf67UOzTczp_UmSjz8w?e=c3jQqH). TODO: We'll build a smaller sample file (just Bandon?) that can be uploaded to GitHub.
+-   Step 2: Process the Wind Data, and store it into the analysis grid. The Wind Data was downloaded from NREL. It covers a rectangular area defined by the Coos Bay lease area to its northwest and by Brookings to its southeast. You can download it the entire data set from this link: [NRELWindData.zip](https://1drv.ms/u/c/fa5fbd6ce30e021b/EQlybtjJ89RGr2187MpkXtIBWNAdf67UOzTczp_UmSjz8w?e=c3jQqH).
 
     The ZIP file contains 51M hourly records in CSV files that, when unloaded from the ZIP file, take up 2.86G of storage. These CSV files have an ideosyncratic structure. The first row contains data that is constant over all the data rows (the subset of this data we need is also in the file name, which is where we get it – as a result, we ignore the first row while reading). The second row contains column labels. The rest of the rows contain actual data.
 
     Because we want a data file that we can use flexibly moving forward, we build an output file that contains the ten columns in the CSV files and three columns for SITEID, LAT, and LON, filtered down to our lease area locations. We are processing wind data from a height of 120m, and air temperature from a height of 2m.
+
+    In the github repo's data directory, you can find a subset of the data that is suitable for testing the code. It contains data for 10% of the sites in Coos Bay and Brookings and for four months (Jan, Apr, Jul, Oct). To use this data, unload the zip file into a subdirectory and modify the "wind_files" variable in the Step 2 code to point to that directory.
 
     Run Step 2 by sourcing the file. It will take a while. It will create a single CSV file. (See previous TODO).
 
@@ -59,8 +61,8 @@ The implementation is in four files in the "Code" sub-directory:
 
 -   Step 4: Fisheries data
 
-    Our fisheries strategy is evolving. The version "Step 4a" calculates a simple proxy allocation of annual Oregon commercial fishing data (around \$190M statewide (QUERY: Why do we allocate total statewide revenue to these two areas?). The code contains two algorithms: calculate fishing in a grid zone based on its distance from shore, and calculate it based on the depth of water in the area.
+    Our fisheries strategy is evolving. The version "Step 4a" calculates a simple proxy allocation of annual Oregon commercial fishing data (around \$190M statewide, of which we estimate \$9.45M to come from the study area). The code contains two algorithms: calculate fishing in a grid zone based on its distance from shore, and calculate it based on the depth of water in the area.
 
-    A key assumption in this paper (taken from Crow 2024) is that fishing in a zone with a wind turbine is only 1/2 as productive as fishing in open water. This is parameter in the code, and 1/4 and 3/4 are coded up as options to explore.
+    A key assumption is that fishing in a zone with a wind turbine is only 1/2 as productive as fishing in open water. This is parameter in the code, and 1/4 and 3/4 are coded up as options to explore.
 
     Run Step 4 by sourcing the file. It also contains several "maps" (TODO: make real maps).
