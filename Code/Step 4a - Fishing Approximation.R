@@ -1,14 +1,14 @@
-# Step 4: Oregon Offshore Wind Analysis - Fisheries Economic Data Creation
+# Step 4: Oregon Offshore Wind Analysis - Enhanced Fisheries Economic Data Creation
 # Prerequisites: Run Steps 1-3 (lease areas, wind data, power calculations)
 
 library(dplyr)
 library(sf)
 library(ggplot2)
 
-# Function to create synthetic fisheries data based on Oregon research
-create_fisheries_data <- function(annual_power, method = "distance_based") {
+# Function to create enhanced fisheries data based on multiple realistic factors
+create_fisheries_data <- function(annual_power, method = "enhanced_spatial") {
   
-  cat("=== CREATING FISHERIES ECONOMIC DATA ===\n")
+  cat("=== CREATING ENHANCED FISHERIES ECONOMIC DATA ===\n")
   cat("Based on Oregon commercial fishing research and spatial patterns\n\n")
   
   # Oregon commercial fishing economics (2018-2022 average: $189M statewide)
@@ -16,42 +16,78 @@ create_fisheries_data <- function(annual_power, method = "distance_based") {
   
   # Convert power data to spatial object
   power_sf <- st_as_sf(annual_power, coords = c("longitude", "latitude"), crs = 4326)
+  power_coords <- st_coordinates(power_sf)
   
-  if (method == "distance_based") {
-    # Method 1: Distance-based fishing intensity
-    # Assumption: Fishing activity decreases with distance from shore
+  if (method == "enhanced_spatial") {
+    # Enhanced Method: Multiple realistic factors affecting fishing value
+    
+    # Define major fishing ports/harbors with relative importance
+    harbors <- data.frame(
+      name = c("Newport", "Coos Bay", "Brookings", "Bandon", "Florence"),
+      lon = c(-124.05, -124.22, -124.28, -124.41, -124.10),
+      lat = c(44.63, 43.37, 42.05, 43.12, 43.98),
+      importance = c(1.0, 0.9, 0.7, 0.5, 0.6)  # Based on relative port size/activity
+    )
+    
+    # 1. Distance from shore effect (closer = higher fishing value)
+    annual_power$distance_offshore <- abs(annual_power$longitude + 124.5)  # Distance from ~coast
+    annual_power$shore_effect <- pmax(0, 2.0 - annual_power$distance_offshore * 3.5)
+    
+    # 2. Proximity to fishing harbors (closer = higher value)
+    annual_power$harbor_effect <- 0
+    for(i in 1:nrow(harbors)) {
+      # Calculate distance to each harbor
+      distance_to_harbor <- sqrt((annual_power$latitude - harbors$lat[i])^2 + 
+                                   (annual_power$longitude - harbors$lon[i])^2)
+      # Add weighted proximity effect
+      harbor_value <- harbors$importance[i] * pmax(0, 1.5 - distance_to_harbor * 2.0)
+      annual_power$harbor_effect <- annual_power$harbor_effect + harbor_value
+    }
+    
+    # 3. Depth considerations (estimate depth from distance offshore)
+    annual_power$estimated_depth_m <- 50 + annual_power$distance_offshore * 180
+    annual_power$depth_effect <- ifelse(annual_power$estimated_depth_m < 100, 0.8,  # Too shallow
+                                        ifelse(annual_power$estimated_depth_m > 300, 0.3,  # Too deep
+                                               1.0))  # Optimal depth (100-300m)
+    
+    # 4. Species distribution patterns (latitudinal variation)
+    annual_power$species_effect <- 0.7 + 
+      0.3 * sin((annual_power$latitude - 42) * 3) +  # Primary species variation
+      0.2 * cos((annual_power$latitude - 43) * 4)    # Secondary variation
+    
+    # 5. Combine all factors into fishing intensity
+    annual_power$fishing_intensity <- (annual_power$shore_effect * 0.4 +      # 40% shore proximity
+                                         annual_power$harbor_effect * 0.3 +     # 30% harbor proximity  
+                                         annual_power$depth_effect * 0.2 +      # 20% depth suitability
+                                         annual_power$species_effect * 0.1)     # 10% species distribution
+    
+    # Normalize fishing intensity (0 to 1 scale)
+    max_intensity <- max(annual_power$fishing_intensity, na.rm = TRUE)
+    min_intensity <- min(annual_power$fishing_intensity, na.rm = TRUE)
+    annual_power$fishing_intensity <- (annual_power$fishing_intensity - min_intensity) / (max_intensity - min_intensity)
+    
+  } else if (method == "distance_based") {
+    # Original simple distance-based method (for comparison)
     
     # Calculate distance to nearest shore (simplified)
-    # Approximate Oregon coast as line from 42°N to 44.3°N at -125.5°W (approximate shore)
     coast_line <- data.frame(
       lat = seq(42, 44.3, by = 0.1),
       lon = rep(-125.5, length(seq(42, 44.3, by = 0.1)))
     )
     
-    power_coords <- st_coordinates(power_sf)
-    
-    # Calculate approximate distance to shore (degrees, then convert to km)
     annual_power$dist_to_shore_km <- apply(power_coords, 1, function(point) {
       distances <- sqrt((point[1] - coast_line$lon)^2 + (point[2] - coast_line$lat)^2)
-      min(distances) * 111  # Convert degrees to km (approximate)
+      min(distances) * 111  # Convert degrees to km
     })
     
     # Fishing intensity decreases exponentially with distance from shore
-    # Based on research: most Oregon commercial fishing is within 30 nautical miles (55 km)
     annual_power$fishing_intensity <- exp(-annual_power$dist_to_shore_km / 20)
-    
-    # Normalize fishing intensity (0 to 1 scale)
     annual_power$fishing_intensity <- annual_power$fishing_intensity / max(annual_power$fishing_intensity)
     
   } else if (method == "depth_based") {
-    # Method 2: Depth-based fishing patterns
-    # Different fisheries operate at different depths
-    
-    # Estimate depth based on distance from shore (rough approximation)
-    # Oregon continental shelf: 0-200m depth within ~50km of shore
+    # Depth-based fishing patterns
     annual_power$estimated_depth_m <- pmax(10, annual_power$dist_to_shore_km * 4)
     
-    # Different fishing intensity by depth zone
     annual_power$fishing_intensity <- ifelse(
       annual_power$estimated_depth_m < 50, 0.9,      # Nearshore high intensity
       ifelse(annual_power$estimated_depth_m < 100, 0.7,  # Mid-shelf moderate
@@ -61,13 +97,11 @@ create_fisheries_data <- function(annual_power, method = "distance_based") {
   }
   
   # Calculate annual fishing revenue per 2x2km grid cell
-  # Based on Oregon statewide revenue distributed by fishing intensity
-  
   # Oregon lease area represents approximately 5% of Oregon's fishing grounds
   lease_area_total_revenue <- 189e6 * 0.05  # $9.45M for lease areas (2018-2022 avg)
   
   # Distribute revenue based on fishing intensity
-  total_intensity <- sum(annual_power$fishing_intensity)
+  total_intensity <- sum(annual_power$fishing_intensity, na.rm = TRUE)
   annual_power$annual_fishing_revenue_usd <- (annual_power$fishing_intensity / total_intensity) * lease_area_total_revenue
   
   # Add fishery composition (based on Oregon research)
@@ -86,10 +120,20 @@ create_fisheries_data <- function(annual_power, method = "distance_based") {
       " to $", format(round(max(annual_power$annual_fishing_revenue_usd)), big.mark=","), " per grid cell\n", sep="")
   cat("Average revenue per km²: $", format(round(mean(annual_power$fishing_revenue_per_km2)), big.mark=","), "\n", sep="")
   
+  # Print factor contributions for enhanced method
+  if (method == "enhanced_spatial") {
+    cat("\nFISHING INTENSITY FACTOR ANALYSIS:\n")
+    cat("Shore effect range:", round(min(annual_power$shore_effect), 3), "to", round(max(annual_power$shore_effect), 3), "\n")
+    cat("Harbor effect range:", round(min(annual_power$harbor_effect), 3), "to", round(max(annual_power$harbor_effect), 3), "\n")
+    cat("Depth effect range:", round(min(annual_power$depth_effect), 3), "to", round(max(annual_power$depth_effect), 3), "\n")
+    cat("Species effect range:", round(min(annual_power$species_effect), 3), "to", round(max(annual_power$species_effect), 3), "\n")
+    cat("Final fishing intensity range:", round(min(annual_power$fishing_intensity), 3), "to", round(max(annual_power$fishing_intensity), 3), "\n")
+  }
+  
   return(annual_power)
 }
 
-# Function to calculate economic trade-offs
+# Function to calculate economic trade-offs (unchanged)
 calculate_economic_tradeoffs <- function(wind_fish_data, fishing_loss_percent = 50) {
   
   cat("\n=== ECONOMIC TRADE-OFF ANALYSIS ===\n")
@@ -145,7 +189,7 @@ calculate_economic_tradeoffs <- function(wind_fish_data, fishing_loss_percent = 
   return(wind_fish_data)
 }
 
-# Function to create optimization visualizations
+# Function to create optimization visualizations (unchanged)
 plot_economic_optimization <- function(wind_fish_data, lease_areas) {
   
   # Convert to spatial data
@@ -169,7 +213,7 @@ plot_economic_optimization <- function(wind_fish_data, lease_areas) {
     geom_sf(data = optimization_sf, aes(color = fishing_intensity), size = 1.2) +
     scale_color_viridis_c(name = "Fishing\nIntensity") +
     labs(title = "Commercial Fishing Intensity",
-         subtitle = "Higher values indicate more fishing activity") +
+         subtitle = "Based on shore proximity, harbors, depth, and species distribution") +
     theme_minimal()
   
   # 3. Economic Category Map
@@ -201,13 +245,12 @@ plot_economic_optimization <- function(wind_fish_data, lease_areas) {
   ))
 }
 
-cat("=== STEP 4 FUNCTIONS LOADED ===\n")
-cat("Ready to create fisheries data and run optimization!\n\n")
-cat("To run Step 4, execute:\n")
-wind_fish_data <- create_fisheries_data(annual_power)
-optimization_results <- calculate_economic_tradeoffs(wind_fish_data, fishing_loss_percent = 50)
-maps <- plot_economic_optimization(optimization_results, lease_areas)
-maps$net_value  # View net economic value map
-cat("To test different fishing loss scenarios:\n")
-cat("# 25% loss: optimization_25 <- calculate_economic_tradeoffs(wind_fish_data, 25)\n")
-cat("# 75% loss: optimization_75 <- calculate_economic_tradeoffs(wind_fish_data, 75)\n")
+cat("=== ENHANCED STEP 4 FUNCTIONS LOADED ===\n")
+cat("Ready to create enhanced fisheries data and run optimization!\n\n")
+cat("To run Step 4 with enhanced algorithm:\n")
+cat("wind_fish_data <- create_fisheries_data(annual_power, method = 'enhanced_spatial')\n")
+cat("optimization_results <- calculate_economic_tradeoffs(wind_fish_data, fishing_loss_percent = 50)\n")
+cat("maps <- plot_economic_optimization(optimization_results, lease_areas)\n")
+cat("maps$fishing_intensity  # View enhanced fishing intensity map\n\n")
+cat("To compare with original distance-based method:\n")
+cat("wind_fish_simple <- create_fisheries_data(annual_power, method = 'distance_based')\n")

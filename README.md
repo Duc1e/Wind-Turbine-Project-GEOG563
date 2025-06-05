@@ -23,7 +23,7 @@ In order to implement the project, the team will accomplish the following tasks:
 ## Project Schedule
 
 | **Week** | **Infrastructure** | **Bibliography** | **Data Sources** | **Optimization** | **Paper** |
-|------------|------------|------------|------------|------------|------------|
+|----|----|----|----|----|----|
 | 1 (4/04) | Started, Learning |  |  |  |  |
 | 2 (4/11) | Learning, Ready |  |  |  |  |
 | 3 (4/18) |  | Search Started | Search Started |  |  |
@@ -45,15 +45,15 @@ The implementation is in four files in the "Code" sub-directory:
 
     Run Step 1 by sourcing the entire file. It contains a function that is called by the Step 2 code that loads wind data into the grid, so, you have to run Step 1 first. At the end of execution, it prints a debugging table showing the grid areas. TODO: Make this a map.
 
--   Step 2: Process the Wind Data, and store it into the analysis grid. The Wind Data was downloaded from NREL. It covers a rectangular area defined by the Coos Bay lease area to its northwest and by Brookings to its southeast. You can download it the entire data set from this link: [NRELWindData.zip](https://1drv.ms/u/c/fa5fbd6ce30e021b/EQlybtjJ89RGr2187MpkXtIBWNAdf67UOzTczp_UmSjz8w?e=c3jQqH).
+-   Step 2: Process the Wind Data, and store it into the analysis grid. The Wind Data was downloaded from NREL. It covers a rectangular area defined by the Coos Bay lease area to its northwest and by Brookings to its southeast. You can download it the entire data set from this link: [NREL 2019 dataset for the analysis area](https://1drv.ms/u/c/fa5fbd6ce30e021b/Ea8YvQTuAhFGvc27bwSJiOkBuU3j20lZ3p2xx3IAe-jukA?e=vOswCE). Unzip it into a directory, and then (if necessary) change the Step 2 code to point to that directory. There are comments in the code to help you with that.
 
-    The ZIP file contains 51M hourly records in CSV files that, when unloaded from the ZIP file, take up 2.86G of storage. These CSV files have an ideosyncratic structure. The first row contains data that is constant over all the data rows (the subset of this data we need is also in the file name, which is where we get it – as a result, we ignore the first row while reading). The second row contains column labels. The rest of the rows contain actual data.
+    The ZIP file contains 51M hourly records in CSV files that, when unloaded from the ZIP file, take up 2.86G of storage. These CSV files have an idiosyncratic structure. The first row contains data that is constant over all the data rows (the subset of this data we need is also in the file name, which is where we get it – as a result, we ignore the first row while reading). The second row contains column labels. The rest of the rows contain actual data.
 
     Because we want a data file that we can use flexibly moving forward, we build an output file that contains the ten columns in the CSV files and three columns for SITEID, LAT, and LON, filtered down to our lease area locations. We are processing wind data from a height of 120m, and air temperature from a height of 2m.
 
-    In the github repo's data directory, you can find a subset of the data that is suitable for testing the code. It contains data for 10% of the sites in Coos Bay and Brookings and for four months (Jan, Apr, Jul, Oct). To use this data, unload the zip file into a subdirectory and modify the "wind_files" variable in the Step 2 code to point to that directory.
+    Because everyone other than us who is reading this README will want to run the code against a test dataset, we have built a ZIP file containing a smaller dataset called WindDataSubset.zip, which we've stored in the Data subdirectory of our project. It filters the large dataset (bounded by latitude and longitude) to the subset of data in the two lease areas, then filters to 10% of those sites using geographic stratification, and then keeps four months (January, April, July, and October) to further reduce the data without introducing seasonal problems. The results from this test dataset mirror our larger work and make it easier to look at what we're doing for the average Joe. Look to the comments in the "Step 2" script to edit the code to point to this subset.
 
-    Run Step 2 by sourcing the file. It will take a while. It will create a single CSV file. (See previous TODO).
+    Run Step 2 by sourcing whichever dataset you use. The larger dataset will take a while; the smaller dataset will run quickly. Both will create a single CSV file with the same name unless you take care.
 
 -   Step 3: Calculate power available at each grid point. Rather than choosing a particular brand of wind turbine, we use a generic power curve for a 10MW offshore turbine. We calculate annual potential revenue metrics per location. The mean capacity factor for the area is 36.5%. There are 566 high-quality sites (capacity factor \>= 40%). The total achievable annual revenue for the area is \$2.5B (assuming \$50/MWh).
 
