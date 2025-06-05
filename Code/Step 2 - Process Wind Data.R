@@ -59,6 +59,10 @@ cat("Processing all wind data files...\n")
 # Using lapply (efficient at this scale, though this takes time)
 all_wind_data <- bind_rows(lapply(wind_files, read_wind_file_final))
 
+# Code needed only for the larger dataset, but also creates data needed later.
+lease_data <- filter_nrel_to_lease_areas(all_wind_data, lease_areas)
+wind_data_lease <- lease_data$wind_data_lease
+
 # Check the results
 cat("\n=== PROCESSING COMPLETE ===\n")
 cat("Total rows:", nrow(all_wind_data), "\n")

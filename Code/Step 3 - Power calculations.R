@@ -160,4 +160,4 @@ summarize_wind_resource(annual_power)
 maps <- plot_wind_resource(annual_power, lease_areas)
 maps$capacity_factor
 
-cat("Power generation calculated!\n\n")
+cat("Power generation!\n\n")
