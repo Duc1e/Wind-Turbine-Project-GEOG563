@@ -23,7 +23,7 @@ In order to implement the project, the team will accomplish the following tasks:
 ## Project Schedule
 
 | **Week** | **Infrastructure** | **Bibliography** | **Data Sources** | **Optimization** | **Paper** |
-|----|----|----|----|----|----|
+|------------|------------|------------|------------|------------|------------|
 | 1 (4/04) | Started, Learning |  |  |  |  |
 | 2 (4/11) | Learning, Ready |  |  |  |  |
 | 3 (4/18) |  | Search Started | Search Started |  |  |
@@ -66,3 +66,7 @@ The implementation is in four files in the "Code" sub-directory:
     A key assumption is that fishing in a zone with a wind turbine is only 1/2 as productive as fishing in open water. This is parameter in the code, and 1/4 and 3/4 are coded up as options to explore.
 
     Run Step 4 by sourcing the file. It also contains several "maps" (TODO: make real maps).
+
+-   MAP files
+
+    There are four MAP files in the code subdirectory. Each of them create one of the maps used in our presentation. They represent an advance on the data analysis. Each can be run by sourcing it. You will need to run the "Step" files before running the map files.
